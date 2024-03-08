@@ -2,7 +2,7 @@
   <div></div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue'
 const squrriel = ref('')
 async function getdata() {
