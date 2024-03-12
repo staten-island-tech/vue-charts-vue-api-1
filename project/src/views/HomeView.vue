@@ -4,11 +4,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-const data = ref('')
+const squrriel = ref('')
 async function getsqurriel() {
   let res = await fetch('https://data.cityofnewyork.us/resource/vfnx-vebw.json')
   let data = await res.json()
-  console.log(data)
+  squrriel.value = data
+  console.log(squrriel)
 }
 onMounted(() => {
   getsqurriel()
