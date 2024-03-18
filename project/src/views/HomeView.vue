@@ -1,16 +1,17 @@
 <template>
   <div>
-    <squrrielcard
-      v-for="squrriel in squrriels"
+    <CardList
+      class="card"
+      v-for="card in squrriels"
       :key="squrriels.unique_squirrel_id"
-      :squrriel="squrriel"
-    ></squrrielcard>
+      :card="card"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { squrrielcard } from '../components/Squrrielcard.vue'
+import CardList from '@/components/SqurrielCard.vue'
 const squrriels = ref('')
 async function getsqurriel() {
   let res = await fetch('https://data.cityofnewyork.us/resource/vfnx-vebw.json')

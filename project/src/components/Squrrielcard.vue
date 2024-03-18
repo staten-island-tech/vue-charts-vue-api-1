@@ -1,12 +1,14 @@
 <template>
-  <div class="squrrielcard">
-    <h2>{{ squrriel.unique_squirrel_id }}</h2>
+  <div>
+    <div class="CardList">
+      <h2>{{ card.unique_squirrel_id }}</h2>
+    </div>
   </div>
 </template>
 
-<script>
+<script setup>
 const props = defineProps({
-  squrriel: object
+  card: Object
 })
 </script>
 
