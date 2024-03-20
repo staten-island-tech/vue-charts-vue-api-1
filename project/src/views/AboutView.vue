@@ -1,37 +1,51 @@
 <template>
-  <div></div>
-  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <div>
+    <PieChart :chartData="chartData" />
+  </div>
 </template>
 
 <script>
-import { Bar } from 'vue-chartjs'
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
-} from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+import { Pie } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend } from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend)
 
 export default {
-  name: 'BarChart',
-  components: { Bar },
+  name: 'PieChart',
+  components: { Pie },
   data() {
     return {
       chartData: {
-        labels: ['January', 'February', 'March', 'April'],
-        datasets: [{ data: [40, 20, 12, 30] }]
-      },
-      chartOptions: {
-        responsive: true
+        labels: [],
+        datasets: [{
+          backgroundColor: ['#007bff', '#28a745', '#dc3545', '#ffc107'],
+          data: []
+        }]
+      }
+    }
+  },
+  mounted() {
+    this.fetchChartData()
+  },
+  methods: {
+    async fetchChartData() {
+      try {
+        const response = await fetch('https://data.cityofnewyork.us/resource/vfnx-vebw.json')
+        const data = await response.json()
+        
+        // Assuming the response contains an array of objects with 'month' and 'value' properties
+        const labels = data.map(entry => entry.month)
+        const values = data.map(entry => entry.value)
+
+        this.chartData.labels = labels
+        this.chartData.datasets[0].data = values
+      } catch (error) {
+        console.error('Error fetching chart data:', error)
       }
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
+
