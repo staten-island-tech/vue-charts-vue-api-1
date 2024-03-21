@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="CardList">
-      <h2>{{ card.unique_squirrel_id }}</h2>
+      <h2 class="name">{{ card.unique_squirrel_id }}</h2>
     </div>
   </div>
 </template>
