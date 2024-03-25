@@ -28,20 +28,24 @@ export default {
   },
   methods: {
     async fetchChartData() {
-      try {
-        const response = await fetch('https://data.cityofnewyork.us/resource/vfnx-vebw.json')
-        const data = await response.json()
-        
-        // Assuming the response contains an array of objects with 'month' and 'value' properties
-        const labels = data.map(entry => entry.month)
-        const values = data.map(entry => entry.value)
+  try {
+    const response = await fetch('https://data.cityofnewyork.us/resource/vfnx-vebw.json')
+    const data = await response.json()
 
-        this.chartData.labels = labels
-        this.chartData.datasets[0].data = values
-      } catch (error) {
-        console.error('Error fetching chart data:', error)
-      }
+    if (!Array.isArray(data)) {
+      throw new Error('Invalid data format')
     }
+    
+    const labels = data.map(entry => entry.month)
+    const values = data.map(entry => entry.value)
+
+    this.chartData.labels = labels
+    this.chartData.datasets[0].data = values
+  } catch (error) {
+    console.error('Error fetching chart data:', error)
+  }
+}
+
   }
 }
 </script>
