@@ -1,55 +1,59 @@
 <template>
   <div>
-    <PieChart :chartData="chartData" />
+    <canvas ref="chartCanvas"></canvas>
   </div>
 </template>
 
 <script>
-import { Pie } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend } from 'chart.js'
-ChartJS.register(Title, Tooltip, Legend)
+import Chart from 'chart.js/auto';
 
 export default {
-  name: 'PieChart',
-  components: { Pie },
-  data() {
-    return {
-      chartData: {
-        labels: [],
-        datasets: [{
-          backgroundColor: ['#007bff', '#28a745', '#dc3545', '#ffc107'],
-          data: []
-        }]
-      }
-    }
-  },
   mounted() {
-    this.fetchChartData()
+    this.renderChart();
   },
   methods: {
-    async fetchChartData() {
-  try {
-    const response = await fetch('https://data.cityofnewyork.us/resource/vfnx-vebw.json')
-    const data = await response.json()
-
-    if (!Array.isArray(data)) {
-      throw new Error('Invalid data format')
+    renderChart() {
+      const ctx = this.$refs.chartCanvas.getContext('2d');
+      const labels = ['2000', '2005', '2010', '2015', '2020'];
+      const data = Array.from({ length: 5 }, () => Math.floor(Math.random() * 100));
+      const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Squirel Sightings',
+            data: data,
+            backgroundColor: 'pink',
+            borderColor: 'black',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Sightings'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Year'
+              }
+            }
+          }
+        }
+      });
     }
-    
-    const labels = data.map(entry => entry.month)
-    const values = data.map(entry => entry.value)
-
-    this.chartData.labels = labels
-    this.chartData.datasets[0].data = values
-  } catch (error) {
-    console.error('Error fetching chart data:', error)
   }
-}
-
-  }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style>
+canvas {
+  width: 100%;
+  height: 400px; /* Adjust height as needed */
+}
 </style>
-
