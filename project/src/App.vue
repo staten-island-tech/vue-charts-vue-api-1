@@ -8,8 +8,9 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav></nav>
     </div>
   </header>
-  <RouterLink to="/">Home</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
+  <RouterLink to="/" class="link">Home</RouterLink>
+  <RouterLink to="/about" class="link">Squrriel Color</RouterLink>
+  <RouterLink to="/ChartTwo" class="link">Squrriel </RouterLink>
   <RouterView />
 </template>
 
@@ -18,7 +19,9 @@ header {
   line-height: 1.5;
   max-height: 100vh;
 }
-
+.link {
+  margin-right: 2rem;
+}
 .logo {
   display: block;
   margin: 0 auto 2rem;

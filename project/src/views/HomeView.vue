@@ -24,4 +24,27 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css">
+body * {
+  box-sizing: border-box;
+  font-size: 110%;
+  margin: 0;
+  padding: 0;
+}
+.CardList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: #fec89a;
+  border: black solid;
+}
+.name {
+  width: 30rem;
+  margin: 1rem auto;
+  border-radius: 2rem;
+  object-fit: cover;
+  border-radius: 2rem;
+  justify-content: space-around;
+  text-align: center;
+}
+</style>
