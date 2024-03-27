@@ -1,12 +1,22 @@
 <template>
-  <div>
-    <h1>yea</h1>
-  </div>
+  <Doughnut :data="data" :options="options" />
 </template>
 
-<script setup>
-import { ref, onMounted, reactive } from 'vue'
-import Chart from '@/components/DoughnutChart.vue'
-</script>
+<script lang="js">
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Doughnut } from 'vue-chartjs'
+import * as chartConfig from '@/components/DoughnutChart.vue'
 
-<style lang="scss" scoped></style>
+ChartJS.register(ArcElement, Tooltip, Legend)
+
+export default {
+  name: 'App',
+  components: {
+    Doughnut
+  },
+  data() {
+    return chartConfig
+  }
+}
+</script>
+<style scoped></style>
