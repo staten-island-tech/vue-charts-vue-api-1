@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Squrriels by their id</h1>
     <CardList
       class="card"
       v-for="card in squrriels"
@@ -30,6 +31,10 @@ body * {
   font-size: 110%;
   margin: 0;
   padding: 0;
+}
+h1 {
+  text-align: center;
+  font-size: 3rem;
 }
 .CardList {
   display: flex;
