@@ -24,11 +24,10 @@ getongroundnum()
 getabovegroundnum()
 
 export const data = {
-  labels: [ongroundnum, abovegroundnum],
+  labels: ['ongroundnum', 'abovegroundnum'],
   datasets: [
     {
       backgroundColor: ['#f87979', '#00D8FF'],
-      label: ['ongroundnum', 'abovegroundnum'],
       data: [ongroundnum, abovegroundnum]
     }
   ]
