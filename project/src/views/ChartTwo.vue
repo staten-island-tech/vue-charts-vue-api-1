@@ -1,4 +1,5 @@
 <template>
+  <h1>Squrriel above ground VS on ground</h1>
   <Doughnut :data="data" :options="options" />
 </template>
 
