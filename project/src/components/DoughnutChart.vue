@@ -28,6 +28,7 @@ export const data = {
   datasets: [
     {
       backgroundColor: ['#f87979', '#00D8FF'],
+      label: ['ongroundnum', 'abovegroundnum'],
       data: [ongroundnum, abovegroundnum]
     }
   ]
