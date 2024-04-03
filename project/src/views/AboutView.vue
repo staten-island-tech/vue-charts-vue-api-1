@@ -36,7 +36,14 @@ onMounted(async() => {
 
 async function rechart(){
   loaded.value = false;
-furstuff = {};
+  var props = Object.getOwnPropertyNames(furstuff);
+  for (var i = 0; i < props.length; i++) {
+    delete furstuff[props[i]];
+  }
+  for (var key in furstuff) {
+    delete furstuff[key];
+  } //clear out previous data
+  
   console.log(agefilter.value)
   if (agefilter.value === "nothing") {
     data = await fetchDataNormal();
