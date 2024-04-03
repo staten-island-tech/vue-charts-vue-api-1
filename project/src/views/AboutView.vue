@@ -21,7 +21,7 @@ import Chart from '@/components/BarChart.vue';
 let oldnessarray = [];
 const loaded = ref(false);
 let data = reactive([]);
-const furstuff = ref(null);
+const furstuff = ref({});
 const agefilter = ref("nothing"); //default for dropdown select
 
 onMounted(async() => {

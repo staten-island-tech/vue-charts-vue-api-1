@@ -1,23 +1,33 @@
 <template>
-  <h1>Squrriel above ground VS on ground</h1>
-  <Doughnut :data="data" :options="options" />
+  <h1>Squrriels above ground VS on ground</h1>
+  <Doughnut v-if="loaded" :data="Object.values(sqe)" :labels="Object.keys(sqe)" />
 </template>
 
-<script lang="js">
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'vue-chartjs'
-import * as chartConfig from '@/components/DoughnutChart.vue'
+<script lang="js" setup>
+import Doughnut from "../components/DoughnutChart.vue";
+import { onMounted, ref, reactive } from "vue";
+const loaded = ref(false);
+let d = reactive([]);
+let sqe = reactive ({});
 
-ChartJS.register(ArcElement, Tooltip, Legend)
-
-export default {
-  name: 'App',
-  components: {
-    Doughnut
-  },
-  data() {
-    return chartConfig
-  }
+async function Chart(){
+  loaded.value = false;
+  console.log(d);
+  d.forEach((sq)=> {
+  sqe[sq.location] ??= 0;
+  sqe[sq.location] += 1;}
+  )
+  loaded.value = true;
 }
+
+onMounted(async () => {
+  const fetched = await fetch('https://data.cityofnewyork.us/resource/vfnx-vebw.json')
+  const jsondata = await fetched.json();
+  d = jsondata
+  await Chart();
+});
+
+
+
 </script>
 <style scoped></style>
